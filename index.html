@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Salma 🐻</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blush:#f2c4ce;--rose:#d4728a;--deep-rose:#b04f6a;
+  --cream:#fdf6f0;--warm-white:#fffaf7;
+  --text-dark:#2d1f1f;--text-mid:#6b4c4c;--text-light:#b8948e;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--warm-white);
+  color:var(--text-dark);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+#petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.petal{position:absolute;opacity:0;animation:petalFall linear infinite;}
+@keyframes petalFall{
+  0%{transform:translateY(-40px) rotate(0deg);opacity:0;}
+  8%{opacity:0.5;}92%{opacity:0.3;}
+  100%{transform:translateY(105vh) rotate(540deg);opacity:0;}
+}
+.sparkle{position:fixed;pointer-events:none;z-index:9999;animation:sparkUp 0.8s ease forwards;}
+@keyframes sparkUp{0%{transform:translateY(0) scale(1);opacity:1;}100%{transform:translateY(-50px) scale(0);opacity:0;}}
+
+.screen{
+  display:none;position:relative;z-index:1;
+  min-height:100vh;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:60px 24px;text-align:center;
+  animation:screenIn 0.6s ease;
+}
+.screen.active{display:flex;}
+@keyframes screenIn{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+#s0{background:linear-gradient(155deg,#fdf0f3 0%,#fdf6f0 50%,#f0eaf8 100%);}
+
+.intro-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2.5rem,8vw,5rem);
+  color:var(--text-dark);line-height:1.1;margin-bottom:12px;
+}
+.intro-title em{font-style:italic;color:var(--deep-rose);}
+.intro-sub{font-size:1rem;color:var(--text-mid);font-weight:300;line-height:1.8;max-width:420px;margin-bottom:40px;}
+
+.dudu-hero{
+  width:160px;height:160px;border-radius:50%;overflow:hidden;
+  box-shadow:0 20px 60px rgba(176,79,106,0.2);
+  border:4px solid var(--blush);margin-bottom:36px;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.dudu-hero img{width:100%;height:100%;object-fit:cover;}
+
+.story-screen{max-width:640px;margin:0 auto;width:100%;}
+.scene-box{
+  background:white;border-radius:28px;
+  padding:40px 36px;
+  box-shadow:0 12px 50px rgba(176,79,106,0.1),0 2px 12px rgba(176,79,106,0.06);
+  border:1px solid rgba(242,196,206,0.4);
+  position:relative;overflow:hidden;
+  margin-bottom:28px;width:100%;
+}
+.scene-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blush),var(--rose),var(--blush));
+}
+.scene-num{
+  font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:16px;display:block;
+}
+.dudu-scene{
+  width:100px;height:100px;border-radius:50%;overflow:hidden;
+  margin:0 auto 20px;border:3px solid var(--blush);
+  box-shadow:0 8px 30px rgba(176,79,106,0.15);
+}
+.dudu-scene img{width:100%;height:100%;object-fit:cover;}
+.scene-title{
+  font-family:'DM Serif Display',serif;
+  font-size:1.5rem;color:var(--text-dark);
+  line-height:1.3;margin-bottom:12px;
+}
+.scene-title em{font-style:italic;color:var(--deep-rose);}
+.scene-text{font-size:1rem;color:var(--text-mid);line-height:1.9;font-weight:300;}
+.scene-emoji{font-size:2.5rem;margin-bottom:12px;display:block;}
+
+.progress-bar{
+  width:100%;max-width:640px;height:4px;
+  background:rgba(212,114,138,0.15);border-radius:99px;
+  margin-bottom:32px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;background:linear-gradient(90deg,var(--blush),var(--rose));
+  border-radius:99px;transition:width 0.5s ease;
+}
+
+.choices{display:flex;flex-direction:column;gap:12px;width:100%;max-width:640px;}
+.choice-btn{
+  background:white;border:2px solid rgba(212,114,138,0.25);
+  border-radius:16px;padding:16px 20px;
+  font-family:'Tajawal',sans-serif;font-size:1rem;
+  color:var(--text-dark);cursor:pointer;text-align:right;
+  transition:all 0.25s cubic-bezier(0.34,1.4,0.64,1);
+  box-shadow:0 2px 12px rgba(176,79,106,0.06);
+  display:flex;align-items:center;gap:12px;
+}
+.choice-btn:hover{
+  border-color:var(--rose);background:rgba(242,196,206,0.15);
+  transform:translateX(-6px);box-shadow:0 8px 30px rgba(176,79,106,0.15);
+}
+.choice-icon{font-size:1.4rem;flex-shrink:0;}
+
+#sFinal{background:linear-gradient(155deg,#fdf0f3,#f0eaf8);}
+.final-box{
+  background:white;border-radius:28px;padding:48px 36px;
+  box-shadow:0 20px 80px rgba(176,79,106,0.15);
+  max-width:580px;width:100%;position:relative;overflow:hidden;margin-bottom:32px;
+}
+.final-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blush),var(--rose),var(--blush));
+}
+.final-dudu{
+  width:130px;height:130px;border-radius:50%;overflow:hidden;
+  margin:0 auto 24px;border:4px solid var(--blush);
+  box-shadow:0 12px 40px rgba(176,79,106,0.2);
+  animation:float 3s ease-in-out infinite;
+}
+.final-dudu img{width:100%;height:100%;object-fit:cover;}
+.final-title{
+  font-family:'DM Serif Display',serif;font-size:2rem;
+  color:var(--text-dark);margin-bottom:20px;line-height:1.2;
+}
+.final-title em{font-style:italic;color:var(--deep-rose);}
+.final-text{font-size:1.05rem;color:var(--text-mid);line-height:2.1;font-weight:300;margin-bottom:28px;}
+.final-text .promise{color:var(--deep-rose);font-weight:700;}
+.final-love{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--rose);font-style:italic;}
+
+.accept-btn{
+  background:linear-gradient(135deg,var(--rose),var(--deep-rose));
+  color:white;border:none;border-radius:99px;padding:1.1rem 3rem;
+  font-family:'Tajawal',sans-serif;font-size:1.15rem;font-weight:700;cursor:pointer;
+  box-shadow:0 8px 30px rgba(176,79,106,0.4);
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s;
+}
+.accept-btn:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 16px 50px rgba(176,79,106,0.5);}
+.accept-btn:disabled{background:linear-gradient(135deg,#86efac,#4ade80);box-shadow:0 8px 30px rgba(74,222,128,0.3);cursor:default;transform:none;}
+
+.accepted-msg{
+  display:none;flex-direction:column;align-items:center;gap:8px;
+  margin-top:24px;animation:screenIn 0.5s ease;
+}
+.acc-main{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--deep-rose);}
+.acc-sub{font-size:0.9rem;color:var(--text-light);font-style:italic;}
+
+.start-btn{
+  background:linear-gradient(135deg,var(--rose),var(--deep-rose));
+  color:white;border:none;border-radius:99px;padding:1rem 2.8rem;
+  font-family:'Tajawal',sans-serif;font-size:1.1rem;font-weight:700;cursor:pointer;
+  box-shadow:0 8px 30px rgba(176,79,106,0.35);
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.3s;
+}
+.start-btn:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 16px 50px rgba(176,79,106,0.45);}
+
+.conf{position:fixed;pointer-events:none;z-index:9999;animation:confFall linear forwards;}
+@keyframes confFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1;}100%{transform:translateY(105vh) rotate(720deg);opacity:0;}}
+
+footer{
+  position:relative;z-index:1;
+  background:var(--cream);border-top:1px solid rgba(212,114,138,0.12);
+  padding:32px;text-align:center;
+}
+.f-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--deep-rose);}
+.f-logo em{font-style:italic;}
+.f-sub{font-size:0.78rem;color:var(--text-light);margin-top:4px;}
+</style>
+</head>
+<body>
+
+<div id="petals"></div>
+
+<!-- SCREEN 0: INTRO -->
+<div class="screen active" id="s0">
+  <div class="dudu-hero"><img src="img1.webp" alt="Dudu"></div>
+  <h1 class="intro-title">دودو <em>عمل غلطة</em><br>مع بوبو</h1>
+  <p class="intro-sub">
+    قال كلام وحش لبوبو في الليل...<br>
+    وبوبو عملتله بلوك. 📵<br><br>
+    انتي اللي هتقرري هل دودو يقدر يكسب بوبو تاني؟ 🥺
+  </p>
+  <button class="start-btn" onclick="goTo(1)">ابدأي القصة ←</button>
+</div>
+
+<!-- SCREEN 1 -->
+<div class="screen" id="s1">
+  <div class="progress-bar"><div class="progress-fill" style="width:9%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-num">المشهد الأول من ١١</span>
+    <div class="dudu-scene"><img src="img1.webp" alt="Dudu"></div>
+    <span class="scene-emoji">🌙</span>
+    <h2 class="scene-title">دودو صحي الصبح على <em>البلوك</em></h2>
+    <p class="scene-text">
+      دودو فتح التليفون الصبح يبعت صباح الخير لبوبو...<br>
+      لاقى إن بوبو عملتله بلوك في الليل. 📵<br><br>
+      بص في الشاشة لمدة دقيقتين من غير ما يتحرك.<br><br>
+      <em>"أنا استاهلت."</em> 😔
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo(2)"><span class="choice-icon">😤</span>يزعل ويقول "تمام خلاص"</button>
+    <button class="choice-btn" onclick="goTo('1b')"><span class="choice-icon">🥺</span>يحس بالذنب لأنه عارف إنه غلط</button>
+  </div>
+</div>
+
+<!-- SCREEN 1b -->
+<div class="screen" id="s1b">
+  <div class="progress-bar"><div class="progress-fill" style="width:14%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-emoji">😤➡️😔</span>
+    <h2 class="scene-title">دودو حاول يزعل...</h2>
+    <p class="scene-text">
+      دودو قال "تمام خلاص أنا مش محتاج ذا الكلام"<br><br>
+      وضع التليفون وفتح يوتيوب.<br>
+      أول فيديو ظهرله كان عن بوبو ودودو. 🐻<br><br>
+      <em>"تمام... أنا غلطان."</em>
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo(2)"><span class="choice-icon">🥺</span>يعترف لنفسه إنه غلط ويفكر في حل</button>
+  </div>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+  <div class="progress-bar"><div class="progress-fill" style="width:27%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-num">المشهد الثالث من ١١</span>
+    <div class="dudu-scene"><img src="img1.webp" alt="Dudu"></div>
+    <span class="scene-emoji">📵</span>
+    <h2 class="scene-title">المشكلة <em>بوبو عاملاله بلوك</em></h2>
+    <p class="scene-text">
+      دودو فكر يبعتلها message بلوك.<br>
+      فكر يكلمها على واتساب بلوك.<br>
+      فكر يكلمها على انستا بلوك.<br><br>
+      <em>"هي عاملاني بلوك في كل حتة يا إلهي."</em> 😭<br><br>
+      ومش قادر يروح عندها لأنه بعيد.
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo(3)"><span class="choice-icon">💡</span>يفكر في حل تاني</button>
+    <button class="choice-btn" onclick="goTo('sChat')"><span class="choice-icon">💬</span>يفتح شاتهم القديم</button>
+  </div>
+</div>
+
+<!-- SCREEN 2b -->
+<div class="screen" id="s2b">
+  <div class="progress-bar"><div class="progress-fill" style="width:28%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-emoji">💡</span>
+    <h2 class="scene-title">دودو عنده فكرة غريبة</h2>
+    <p class="scene-text">
+      دودو فكر يكتب لها جواب ورقي ويبعته بالبريد.<br><br>
+      بعدين تذكر إن ذا سنة ١٨٠٠ مش ٢٠٢٤. 😭<br><br>
+      <em>"لازم أفكر في حاجة أحسن من ذا..."</em>
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo(3)"><span class="choice-icon">💡</span>يفكر في حل تاني</button>
+  </div>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+  <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-num">المشهد الخامس من ١١</span>
+    <div class="dudu-scene"><img src="img1.webp" alt="Dudu"></div>
+    <span class="scene-emoji">📞</span>
+    <h2 class="scene-title">دودو فكر في <em>حل</em></h2>
+    <p class="scene-text">
+      بوبو بلوكته في كل حتة...<br><br>
+      بس دودو فاكر إن عنده حساب انستا قديم من زمان.<br>
+      <em>"dudu_cool_2018"</em> 😭<br><br>
+      بوبو مش بلوكاه على الحساب ذا لأنها نسيت إنه موجود أصلاً.
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo(4)"><span class="choice-icon">🌐</span>يعمل لها موقع خاص زي ما بيعمل عادةً</button>
+    <button class="choice-btn" onclick="goTo('3b')"><span class="choice-icon">🎥</span>يعمل لها فيديو</button>
+  </div>
+</div>
+
+<!-- SCREEN 3b -->
+<div class="screen" id="s3b">
+  <div class="progress-bar"><div class="progress-fill" style="width:42%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-emoji">🎥😅</span>
+    <h2 class="scene-title">الفيديو كان كارثة</h2>
+    <p class="scene-text">
+      دودو فتح الكاميرا وبدأ يتكلم...<br>
+      قال <em>"اسفة يا بو"</em> وعطست الكاميرا وطاحت. 🤧📸<br><br>
+      حاول تاني الإضاءة كانت وحشة.<br>
+      حاول تالت مرة نسي الكلام. 😭<br><br>
+      <em>"الموقع أحسن أنا بعرف أعمله كويس."</em>
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo(4)"><span class="choice-icon">🌐</span>يعمل الموقع ذا أحسن حاجة</button>
+  </div>
+</div>
+
+
+<!-- SCREEN chat - دودو يفتح الشات القديم -->
+<div class="screen" id="sChat">
+  <div class="progress-bar"><div class="progress-fill" style="width:35%"></div></div>
+  <div class="scene-box story-screen">
+    <div class="dudu-scene"><img src="img2.webp" alt="Dudu sad"></div>
+    <span class="scene-num">المشهد الثاني من ١١</span>
+    <span class="scene-emoji">💬</span>
+    <h2 class="scene-title">دودو فتح <em>الشات القديم</em></h2>
+    <p class="scene-text">
+      دودو فتح الشات بينه وبين بوبو وبدأ يسكرول لفوق...<br><br>
+      لاقى بوبو بتقوله: <em>"انت أحسن حاجة في يومي 🌸"</em><br>
+      لاقى نفسه بيقولها: <em>"من غيرك مش هينفع"</em><br>
+      لاقى صورهم وهما مبسوطين.<br><br>
+      وبعدين لاقى آخر رسالة... الكلام الوحش اللي قاله.<br><br>
+      <em>"أنا قلت ذا؟ أنا فعلاً قلت ذا؟"</em> 😔
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo('sSong')"><span class="choice-icon">😞</span>يقفل الشات مش قادر يكمل</button>
+  </div>
+</div>
+
+
+<!-- SCREEN song - دودو يسمع الأغنية -->
+<div class="screen" id="sSong">
+  <div class="progress-bar"><div class="progress-fill" style="width:48%"></div></div>
+  <div class="scene-box story-screen">
+    <div class="dudu-scene"><img src="img2.webp" alt="Dudu sad"></div>
+    <span class="scene-num">المشهد الرابع من ١١</span>
+    <span class="scene-emoji">🎵</span>
+    <h2 class="scene-title">الأغنية <em>بتاعتهم</em></h2>
+    <p class="scene-text">
+      دودو فتح الموسيقى عشان يشغل دماغه...<br><br>
+      أول أغنية اشتغلت كانت الأغنية اللي بوبو بتحبها. 🎶<br><br>
+      وقف. مقدرش يوقفها.<br>
+      جلس يسمعها لآخرها وهو ساكت تماماً.<br><br>
+      <em>"هي دلوقتي بتسمعها برضو؟"</em><br><br>
+      دودو حس إن الدنيا ضاقت. 💔
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo(4)"><span class="choice-icon">💪</span>خلاص، لازم يعمل حاجة فعلاً</button>
+  </div>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+  <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-num">المشهد الثامن من ١١</span>
+    <div class="dudu-scene"><img src="img2.webp" alt="Dudu sad"></div>
+    <span class="scene-emoji">💻</span>
+    <h2 class="scene-title">دودو بيعمل <em>الموقع</em></h2>
+    <p class="scene-text">
+      دودو فتح اللابتوب وبدأ يعمل الموقع.<br><br>
+      كتب جملة محاها.<br>
+      كتب تاني محاها.<br>
+      قضى ساعتين يفكر في كل كلمة. ⌨️<br><br>
+      <em>"عايزها تحس إني فاهم بجد... مش بس آسف."</em>
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo('4c')"><span class="choice-icon">❤️</span>يكتب من قلبه بصدق</button>
+    <button class="choice-btn" onclick="goTo('4b')"><span class="choice-icon">🤖</span>يسأل ChatGPT يساعده</button>
+  </div>
+</div>
+
+<!-- SCREEN 4b -->
+<div class="screen" id="s4b">
+  <div class="progress-bar"><div class="progress-fill" style="width:57%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-emoji">🤖😐</span>
+    <h2 class="scene-title">ChatGPT مش فاهم</h2>
+    <p class="scene-text">
+      دودو سأل ChatGPT يساعده يكتب الاعتذار.<br><br>
+      ChatGPT كتبله: <em>"أنا آسف على أي إزعاج سببته لك."</em> 😐<br><br>
+      دودو: <em>"ذا مش اعتذار ذا إيميل من شركة."</em> 😭<br><br>
+      قرر يكتب بنفسه الكلام الصادق أحسن من أي كلام تاني.
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo('4c')"><span class="choice-icon">❤️</span>يكتب من قلبه هو</button>
+  </div>
+</div>
+
+
+<!-- SCREEN 4c - دودو يفكر يستسلم -->
+<div class="screen" id="s4c">
+  <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+  <div class="scene-box story-screen">
+    <div class="dudu-scene"><img src="img2.webp" alt="Dudu sad"></div>
+    <span class="scene-emoji">🌧️</span>
+    <h2 class="scene-title">دودو فكر <em>يستسلم</em></h2>
+    <p class="scene-text">
+      دودو جلس على الكنبة وبدأ يفكر...<br><br>
+      <em>"ممكن أخليها تمشي. ممكن أكمل من غيرها."</em><br><br>
+      حاول يتخيل يومه من غير بوبو.<br>
+      الصبح من غير ما تكلمه.<br>
+      الليل من غير ما يحكيلها عن يومه.<br><br>
+      مقدرش يكمل التفكير ذا. 💔<br>
+      <em>"مش قادر. وحشتني بجد."</em>
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo(5)"><span class="choice-icon">💪</span>لأ، مش هيستسلم، هيكمل الموقع</button>
+  </div>
+</div>
+
+<!-- SCREEN 5 -->
+<div class="screen" id="s5">
+  <div class="progress-bar"><div class="progress-fill" style="width:81%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-num">المشهد التاسع من ١١</span>
+    <div class="dudu-scene"><img src="img2.webp" alt="Dudu sad"></div>
+    <span class="scene-emoji">🥺</span>
+    <h2 class="scene-title">دودو بيفكر في <em>بوبو</em></h2>
+    <p class="scene-text">
+      دودو وقف وبدأ يفكر ايه اللي بيخلي بوبو مميزة؟<br><br>
+      فاكر إنها دايماً موجودة وقت ما محتاجها.<br>
+      فاكر إن يومه من غيرها بيبقى ناقص.<br><br>
+      <em>"ومع ذلك قلتلها الكلام الوحش ذا... ليه؟"</em> 😔
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo(6)"><span class="choice-icon">✍️</span>يكمل الموقع ويبعته من الحساب القديم</button>
+  </div>
+</div>
+
+<!-- SCREEN 6 -->
+<div class="screen" id="s6">
+  <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+  <div class="scene-box story-screen">
+    <span class="scene-num">المشهد العاشر من ١١</span>
+    <div class="dudu-scene"><img src="img2.webp" alt="Dudu sad"></div>
+    <span class="scene-emoji">📤</span>
+    <h2 class="scene-title">الموقع وصل لـ<em>بوبو</em></h2>
+    <p class="scene-text">
+      دودو بعت اللينك من <em>"dudu_cool_2018"</em> 😅<br><br>
+      بوبو فتحته وهي لسه زعلانة... 😤<br><br>
+      بس لقت دودو عامل ليها موقع كامل زي ما بيعمل دايماً.<br>
+      وبدأت تقرا... 👀
+    </p>
+  </div>
+  <div class="choices">
+    <button class="choice-btn" onclick="goTo('sFinal')"><span class="choice-icon">💬</span>شوفي ايه اللي كتبه دودو...</button>
+  </div>
+</div>
+
+<!-- FINAL SCREEN -->
+<div class="screen" id="sFinal">
+  <div class="final-box">
+    <div class="final-dudu"><img src="img2.webp" alt="Dudu sorry"></div>
+    <span class="scene-emoji">🥺</span>
+    <h2 class="final-title">دودو كتب لـ<em>بوبو</em>...</h2>
+    <p class="final-text">
+      اسف يا بوبو، مكانش فيه داعي اقول الي انا قلته.
+      صراحة كانت حركة طفولية مني وملهاش اي داعي.
+      <br><br>
+      عارف إن كلامي كان وحش، والي بيحبك المفروض ميقولش حاجة زي ذي.
+      <br><br>
+      بس <span class="promise">اوعدك</span> المرة ذي بجد مش هقول اي حاجة زي كذا والله.
+    </p>
+    <p class="final-love">احبك يا بوبو ♡</p>
+  </div>
+  <p style="font-size:0.9rem;color:var(--text-light);margin-bottom:20px;font-style:italic;">دودو بيستنى ردك... 🐻</p>
+  <button class="accept-btn" id="acceptBtn" onclick="accept()">قبلت اعتذاره 🤍</button>
+  <div class="accepted-msg" id="acceptedMsg">
+    <p class="acc-main">شكراً يا بوبو 🌸</p>
+    <p class="acc-sub">دودو بيرقص من الفرحة دلوقتي 🐻💕</p>
+  </div>
+</div>
+
+<footer>
+  <div class="f-logo">Bubu <em>&</em> Dudu</div>
+  <div class="f-sub">صُنع بكل الحب ♡</div>
+</footer>
+
+<script>
+const petalSym=['🌸','✿','❀','·','🌷','♡'];
+function mkPetal(){
+  const p=document.createElement('div');p.className='petal';
+  p.textContent=petalSym[Math.floor(Math.random()*petalSym.length)];
+  const d=10+Math.random()*14;
+  p.style.cssText=`left:${Math.random()*100}%;font-size:${0.8+Math.random()*0.9}rem;animation-duration:${d}s;animation-delay:${Math.random()*4}s;`;
+  document.getElementById('petals').appendChild(p);
+  setTimeout(()=>p.remove(),(d+5)*1000);
+}
+for(let i=0;i<12;i++) mkPetal();
+setInterval(mkPetal,1800);
+
+document.addEventListener('click',e=>{
+  if(e.target.tagName==='BUTTON') return;
+  ['✦','♡','✿','🌸'].forEach((s,i)=>{
+    const el=document.createElement('div');el.className='sparkle';
+    el.textContent=s;
+    el.style.cssText=`left:${e.clientX+(Math.random()-.5)*40}px;top:${e.clientY+(Math.random()-.5)*30}px;color:${['#d4728a','#c9a0b4','#b04f6a','#f2c4ce'][i]};font-size:1.1rem;animation-delay:${i*.06}s;`;
+    document.body.appendChild(el);setTimeout(()=>el.remove(),900);
+  });
+});
+
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  let target=document.getElementById('s'+id);
+  if(!target) target=document.getElementById(id);
+  if(target){target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+}
+
+function accept(){
+  document.getElementById('acceptBtn').disabled=true;
+  document.getElementById('acceptBtn').textContent='✓ شكراً يا بوبو';
+  document.getElementById('acceptedMsg').style.display='flex';
+  burst();
+}
+
+function burst(){
+  const items=['🌸','♡','✦','💕','✿','🌷'];
+  for(let i=0;i<40;i++){
+    setTimeout(()=>{
+      const c=document.createElement('div');c.className='conf';
+      c.textContent=items[Math.floor(Math.random()*items.length)];
+      c.style.cssText=`left:${Math.random()*100}vw;top:-10px;font-size:${1.2+Math.random()*.8}rem;animation-duration:${2.5+Math.random()*2}s;animation-delay:${Math.random()*0.4}s;`;
+      document.body.appendChild(c);setTimeout(()=>c.remove(),5000);
+    },i*60);
+  }
+}
+</script>
+</body>
+</html>
